@@ -1,0 +1,61 @@
+{
+  "id": 20,
+  "pack": "easy",
+  "width": 4,
+  "height": 4,
+  "lives": 3,
+  "arrows": [
+    {
+      "color": 2,
+      "nodalPoints": [
+        {
+          "column": 0,
+          "row": 2
+        },
+        {
+          "column": 0,
+          "row": 1
+        }
+      ]
+    },
+    {
+      "color": 0,
+      "nodalPoints": [
+        {
+          "column": 0,
+          "row": 0
+        },
+        {
+          "column": 1,
+          "row": 0
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 0,
+          "row": 3
+        },
+        {
+          "column": 1,
+          "row": 3
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 2,
+          "row": 3
+        },
+        {
+          "column": 2,
+          "row": 2
+        }
+      ]
+    }
+  ]
+}
