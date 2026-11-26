@@ -1,0 +1,315 @@
+{
+  "id": 1663,
+  "pack": "hard",
+  "width": 8,
+  "height": 8,
+  "lives": 3,
+  "arrows": [
+    {
+      "color": 5,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 3
+        },
+        {
+          "column": 5,
+          "row": 4
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 6,
+          "row": 4
+        },
+        {
+          "column": 6,
+          "row": 5
+        },
+        {
+          "column": 7,
+          "row": 5
+        },
+        {
+          "column": 7,
+          "row": 4
+        },
+        {
+          "column": 7,
+          "row": 3
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 5
+        },
+        {
+          "column": 5,
+          "row": 6
+        },
+        {
+          "column": 4,
+          "row": 6
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 5
+        },
+        {
+          "column": 3,
+          "row": 5
+        }
+      ]
+    },
+    {
+      "color": 4,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 7
+        },
+        {
+          "column": 4,
+          "row": 7
+        }
+      ]
+    },
+    {
+      "color": 6,
+      "nodalPoints": [
+        {
+          "column": 2,
+          "row": 5
+        },
+        {
+          "column": 2,
+          "row": 6
+        },
+        {
+          "column": 1,
+          "row": 6
+        },
+        {
+          "column": 1,
+          "row": 5
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 2
+        },
+        {
+          "column": 4,
+          "row": 2
+        }
+      ]
+    },
+    {
+      "color": 4,
+      "nodalPoints": [
+        {
+          "column": 6,
+          "row": 6
+        },
+        {
+          "column": 6,
+          "row": 7
+        }
+      ]
+    },
+    {
+      "color": 7,
+      "nodalPoints": [
+        {
+          "column": 3,
+          "row": 7
+        },
+        {
+          "column": 2,
+          "row": 7
+        },
+        {
+          "column": 1,
+          "row": 7
+        },
+        {
+          "column": 0,
+          "row": 7
+        }
+      ]
+    },
+    {
+      "color": 6,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 3
+        },
+        {
+          "column": 3,
+          "row": 3
+        },
+        {
+          "column": 2,
+          "row": 3
+        },
+        {
+          "column": 2,
+          "row": 2
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 2,
+          "row": 1
+        },
+        {
+          "column": 2,
+          "row": 0
+        },
+        {
+          "column": 1,
+          "row": 0
+        }
+      ]
+    },
+    {
+      "color": 4,
+      "nodalPoints": [
+        {
+          "column": 6,
+          "row": 2
+        },
+        {
+          "column": 7,
+          "row": 2
+        },
+        {
+          "column": 7,
+          "row": 1
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 3,
+          "row": 0
+        },
+        {
+          "column": 4,
+          "row": 0
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 3,
+          "row": 1
+        },
+        {
+          "column": 4,
+          "row": 1
+        },
+        {
+          "column": 5,
+          "row": 1
+        },
+        {
+          "column": 5,
+          "row": 0
+        },
+        {
+          "column": 6,
+          "row": 0
+        }
+      ]
+    },
+    {
+      "color": 4,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 4
+        },
+        {
+          "column": 3,
+          "row": 4
+        },
+        {
+          "column": 2,
+          "row": 4
+        },
+        {
+          "column": 1,
+          "row": 4
+        },
+        {
+          "column": 0,
+          "row": 4
+        }
+      ]
+    },
+    {
+      "color": 5,
+      "nodalPoints": [
+        {
+          "column": 1,
+          "row": 1
+        },
+        {
+          "column": 0,
+          "row": 1
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 1,
+          "row": 3
+        },
+        {
+          "column": 0,
+          "row": 3
+        }
+      ]
+    },
+    {
+      "color": 6,
+      "nodalPoints": [
+        {
+          "column": 7,
+          "row": 6
+        },
+        {
+          "column": 7,
+          "row": 7
+        }
+      ]
+    }
+  ]
+}

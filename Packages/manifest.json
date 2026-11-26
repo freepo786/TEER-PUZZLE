@@ -1,0 +1,1 @@
+{"dependencies":{"com.applovin.mediation":"8.0.0","com.unity.purchasing":"4.14.2","com.unity.ugui":"2.0.0"},"scopedRegistries":[{"name":"AppLovin","scopes":["com.applovin.mediation"],"url":"https://artifact.applovin.com/UPM/"}]}

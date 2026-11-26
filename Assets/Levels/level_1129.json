@@ -1,0 +1,171 @@
+{
+  "id": 1129,
+  "pack": "medium",
+  "width": 6,
+  "height": 6,
+  "lives": 3,
+  "arrows": [
+    {
+      "color": 2,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 5
+        },
+        {
+          "column": 4,
+          "row": 5
+        }
+      ]
+    },
+    {
+      "color": 0,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 4
+        },
+        {
+          "column": 3,
+          "row": 4
+        }
+      ]
+    },
+    {
+      "color": 7,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 4
+        },
+        {
+          "column": 5,
+          "row": 3
+        },
+        {
+          "column": 5,
+          "row": 2
+        }
+      ]
+    },
+    {
+      "color": 7,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 3
+        },
+        {
+          "column": 3,
+          "row": 3
+        }
+      ]
+    },
+    {
+      "color": 7,
+      "nodalPoints": [
+        {
+          "column": 5,
+          "row": 1
+        },
+        {
+          "column": 4,
+          "row": 1
+        }
+      ]
+    },
+    {
+      "color": 3,
+      "nodalPoints": [
+        {
+          "column": 2,
+          "row": 3
+        },
+        {
+          "column": 1,
+          "row": 3
+        },
+        {
+          "column": 1,
+          "row": 4
+        },
+        {
+          "column": 0,
+          "row": 4
+        }
+      ]
+    },
+    {
+      "color": 5,
+      "nodalPoints": [
+        {
+          "column": 3,
+          "row": 1
+        },
+        {
+          "column": 2,
+          "row": 1
+        },
+        {
+          "column": 1,
+          "row": 1
+        }
+      ]
+    },
+    {
+      "color": 2,
+      "nodalPoints": [
+        {
+          "column": 0,
+          "row": 1
+        },
+        {
+          "column": 0,
+          "row": 0
+        },
+        {
+          "column": 1,
+          "row": 0
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 4,
+          "row": 2
+        },
+        {
+          "column": 3,
+          "row": 2
+        },
+        {
+          "column": 2,
+          "row": 2
+        },
+        {
+          "column": 1,
+          "row": 2
+        },
+        {
+          "column": 0,
+          "row": 2
+        }
+      ]
+    },
+    {
+      "color": 1,
+      "nodalPoints": [
+        {
+          "column": 2,
+          "row": 0
+        },
+        {
+          "column": 3,
+          "row": 0
+        }
+      ]
+    }
+  ]
+}

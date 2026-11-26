@@ -1,0 +1,142 @@
+# Teer Puzzle — Android APK build (GitHub Actions + game-ci)
+# ---------------------------------------------------------------
+# Ye workflow GitHub ke free cloud runner par Unity 6000.3.21f1 se
+# Android APK banata hai — Rehan ke PC par Unity install karne ki
+# zaroorat nahi. Trigger: main par push, ya Actions tab se manual.
+#
+# Pehle se chahiye (aik dafa setup — README.md mein steps hain):
+#   Repo → Settings → Secrets and variables → Actions:
+#     UNITY_LICENSE   = .ulf license file ka poora text
+#     UNITY_EMAIL     = Unity ID ka email
+#     UNITY_PASSWORD  = Unity ID ka password
+#   (.alf file banane ke liye "Unity License Activation" workflow hai.)
+
+name: Build Android APK (v1.4)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # IL2CPP Android build ko disk chahiye — runner par jagah khaali karo.
+      # (game-ci image apna Android SDK khud lata hai, is liye android: false)
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: true
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      # Library cache: pehli build slow hoti hai, us ke baad cache se tez.
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-TeerPuzzle-Android-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-TeerPuzzle-Android-
+            Library-
+
+      # Art/audio generate karo — snapshot push binary PNG/WAV files
+      # nahi leta, is liye CI mein ye scripts Assets dobara banati hain
+      # (Assets/Tools/generate_art.py + generate_audio.py).
+      # Unity build SE PEHLE chalana zaroori hai.
+      - name: Generate art & audio assets
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 Assets/Tools/generate_art.py
+          python3 Assets/Tools/generate_audio.py
+
+      # MainScene.unity repo mein nahi hai (Assets/Scenes/ khaali hai) —
+      # SceneBuilder ise Editor mein banata hai aur Build Settings mein
+      # register karta hai. Build step se PEHLE wohi kaam CI mein karo,
+      # warna build ke paas scene hi nahi hogi.
+      #
+      # Kyun alag docker step (aur customParameters mein -executeMethod kyun nahi):
+      # game-ci/unity-builder apna -executeMethod khud lagata hai (default
+      # build script; buildMethod se badla ja sakta hai) — customParameters
+      # mein doosra -executeMethod dena us se takra jata aur build toot
+      # jata. Is liye SceneBuilder yahan builder wali image se seedha
+      # chalaya jata hai: unityci/editor:ubuntu-6000.3.21f1-android-3
+      # (game-ci/unity-builder action.yml: containerRegistryRepository
+      # "unityci/editor", containerRegistryImageVersion "3" — Docker Hub
+      # par ye tag maujood hai), wohi license secrets aur wohi
+      # /github/workspace mount ke saath. SceneBuilder.BuildMainScene()
+      # scene save karta hai aur EditorBuildSettings.scenes mein register
+      # karta hai — build step phir game-ci docs ke mutabiq "enabled scenes
+      # from the project's settings" banata hai, is liye MainScene build
+      # mein shamil hoti hai.
+      - name: Build Main Scene (SceneBuilder)
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        run: |
+          # License: game-ci v4 container ka home ${RUNNER_TEMP}/_github_home
+          # hota hai — .ulf wahan likho taake scene step wala Unity bhi
+          # licensed ho (builder step yehi karta hai).
+          mkdir -p "$RUNNER_TEMP/_github_home/.local/share/unity3d/Unity"
+          printf '%s' "$UNITY_LICENSE" > "$RUNNER_TEMP/_github_home/.local/share/unity3d/Unity/Unity_lic.ulf"
+
+          docker run --rm \
+            -v "${{ github.workspace }}:/github/workspace" \
+            -v "$RUNNER_TEMP/_github_home:/root" \
+            -w /github/workspace \
+            -e UNITY_LICENSE="$UNITY_LICENSE" \
+            -e UNITY_EMAIL="$UNITY_EMAIL" \
+            -e UNITY_PASSWORD="$UNITY_PASSWORD" \
+            unityci/editor:ubuntu-6000.3.21f1-android-3 \
+            unity-editor -batchmode -nographics -quit \
+            -projectPath /github/workspace \
+            -executeMethod TeerPuzzle.Editor.SceneBuilder.BuildMainScene \
+            -logFile /github/workspace/scene-build.log
+
+          # Scene bani ya nahi — file check hi asal gate hai (Unity
+          # batchmode mein -quit ke saath bhi kabhi 0 exit de deta hai).
+          test -f Assets/Scenes/MainScene.unity || (echo "::error::MainScene.unity nahi bani — scene-build.log dekhen" && exit 1)
+          grep -q "MainScene v1.4 build ho gayi" scene-build.log || (echo "::error::SceneBuilder ka success log nahi mila — scene-build.log dekhen" && exit 1)
+          echo "MainScene.unity ban gayi aur Build Settings mein register hai."
+
+      # Scene build fail ho to log artifact ke tor par mil jaye.
+      - name: Upload scene build log (on failure)
+        if: failure() && hashFiles('scene-build.log') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: scene-build-log
+          path: scene-build.log
+
+      - name: Build Android APK
+        id: build
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.3.21f1
+          targetPlatform: Android
+          buildName: TeerPuzzle
+          versioning: Custom
+          version: 1.4.0
+          androidVersionCode: 4
+          androidExportType: androidPackage
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TeerPuzzle-Android-${{ steps.build.outputs.buildVersion }}
+          path: build/Android
